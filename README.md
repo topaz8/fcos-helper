@@ -1,7 +1,7 @@
 # fcos-helper
 
 ## Purpose
-This script was created to help ease the installation process of Fedora CoreOS. It is designed to be used on the Fedora CoreOS live DVD where it will download `butane` from (here)[https://github.com/coreos/butane] and convert your butane configuration you pass to it via an HTTPS link or a full path. This script also features a way to edit the admin username (if desired), the password hash (if present), and the SSH public key in the butane configuration file (for if you want to use an existing configuration file you did not write yourself). This allows you to use your own password and SSH public key values instead of those provided by the author.
+This script was created to help ease the installation process of Fedora CoreOS. It is designed to be used on the Fedora CoreOS live DVD where it will download `butane` from [here](https://github.com/coreos/butane) and convert your butane configuration you pass to it via an HTTPS link or a full path. This script also features a way to edit the admin username (if desired), the password hash (if present), and the SSH public key in the butane configuration file (for if you want to use an existing configuration file you did not write yourself). This allows you to use your own password and SSH public key values instead of those provided by the author.
 
 You can learn more about the butane specification and how to write a butane configuration [here](https://coreos.github.io/butane/specs/) and you can learn more about Fedora CoreOS [here](https://docs.fedoraproject.org/en-US/fedora-coreos/).
 
