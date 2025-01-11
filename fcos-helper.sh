@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_VERSION="1.1.0"
+SCRIPT_VERSION="1.1.1"
 BUTANE_CFG_LOC=""
 ADMIN_USER=""
 ARCH="$(uname -m)"
@@ -150,15 +150,6 @@ setup_new_admin_user() {
     else
         echo "Notice: The name you've chosen is already defined as the wheel user. Doing nothing."
     fi
-
-    # check if DEFINED_WHEEL_USER even exists in /etc/shadow on the live DVD
-    # usually people will choose 'core' in their butane configs
-    # but we'll still check since the user has not indicated that they want
-    # to use any other admin username
-    sudo grep -qe ^"${DEFINED_WHEEL_USER}" /etc/shadow
-    if [ $? != 0 ]; then
-        sudo useradd -m -k /dev/null -s /bin/bash "${DEFINED_WHEEL_USER}"
-    fi
 }
 
 setup_admin_password() {
@@ -185,6 +176,14 @@ setup_admin_password() {
         local new_hash="$(sudo grep -e ^${ADMIN_USER} /etc/shadow | cut -d : -f 2)"
         sed -i "${DEFINED_WHEEL_USER_PW_HASH_LN} s@password_hash: \$y\$.*@password_hash: ${new_hash}@" "${BUTANE_CFG}"
     else
+        # check if DEFINED_WHEEL_USER even exists in /etc/shadow on the live DVD
+        # usually people will choose 'core' in their butane configs
+        # but we'll still check since the user has not indicated that they want
+        # to use any other admin username
+        sudo grep -qe ^"${DEFINED_WHEEL_USER}" /etc/shadow
+        if [ $? != 0 ]; then
+            sudo useradd -m -k /dev/null -s /bin/bash "${DEFINED_WHEEL_USER}"
+        fi
         echo "${DEFINED_WHEEL_USER}:${user_password}" | sudo chpasswd -s 11 -c YESCRYPT
         local new_hash="$(sudo grep -e ^${DEFINED_WHEEL_USER} /etc/shadow | cut -d : -f 2)"
         sed -i "${DEFINED_WHEEL_USER_PW_HASH_LN} s@password_hash: \$y\$.*@password_hash: ${new_hash}@" "${BUTANE_CFG}"
