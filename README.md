@@ -9,7 +9,7 @@ You can learn more about the butane specification and how to write a butane conf
 ## How To Use
 This script is designed to be used on the live DVD, so after you have booted the live DVD you can get this script by doing:
 ```
-curl -LO https://raw.githubusercontent.com/topaz8/fcos-helper/refs/heads/main/fcos-helper.sh
+curl -LO https://raw.githubusercontent.com/topaz8/fcos-helper/main/fcos-helper.sh
 chmod +x fcos-helper.sh
 ```
 
